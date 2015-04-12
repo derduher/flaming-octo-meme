@@ -1,0 +1,22 @@
+{
+  "name": "flaming-octo-meme",
+  "version": "0.0.1",
+  "description": "do income growth calculations",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf build/*",
+    "build": "cp -R src/* build/",
+    "prepublish": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/derduher/flaming-octo-meme.git"
+  },
+  "author": "Patrick Weygand",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/derduher/flaming-octo-meme/issues"
+  },
+  "homepage": "https://github.com/derduher/flaming-octo-meme"
+}
