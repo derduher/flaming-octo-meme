@@ -1,0 +1,22 @@
+{
+  "name": "flaming-octo-meme",
+  "version": "0.0.0",
+  "homepage": "https://github.com/derduher/flaming-octo-meme",
+  "authors": [
+    "Patrick Weygand <patrick.weygand@ubnt.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.5"
+  }
+}

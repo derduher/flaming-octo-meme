@@ -154,16 +154,18 @@ nav a:hover {
    Author's custom styles
    ========================================================================== */
 
+.generate-columns(@type, @n, @i: 1) when (@i =< @n) {
+  body /deep/ .col--@{type}@{i} {
+    width: (@i * 100% / @n);
+    float: left;
+  }
+  .generate-columns(@type, @n, (@i + 1));
+}
+.generate-columns(xs, 12);
 
-
-
-
-
-
-
-
-
-
+body /deep/ input {
+  width: 100%;
+}
 
 
 
