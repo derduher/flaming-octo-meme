@@ -125,111 +125,12 @@ polymer-element( name="my-element" )
     .row
       .col--xs12 retire {{yearsFromNow}} years from now in {{retireYear}}
     .row
-      .col--xs12 income {{year|getXYearsInFuture(grossIncomePerMonth)}}
+      .col--xs12 income {{year|getXYearsInFuture(12 * grossIncomePerMonth)}}
     .row
-      .col--xs12 expenses {{year|getXYearsInFuture(totalExpensesPerMonth)}}
+      .col--xs12 expenses {{year|getXYearsInFuture(12 * totalExpensesPerMonth)}}
     .row
-      .col--xs12 netincome {{year|getXYearsInFuture(netIncomePerMonth)}}
+      .col--xs12 netincome {{year|getXYearsInFuture(12 * netIncomePerMonth)}}
     .row
       .col--xs12
         #foo
-  script.
-    'use strict';
-    var options = { style: 'currency', currency: 'USD' };
-    var numberFormat = new Intl.NumberFormat('en-US', options);
-    var model = {
-      observe: {
-        totalExpensesPerMonth: 'drawChart',
-        grossIncomePerMonth: 'drawChart',
-        return: 'drawChart',
-        inflation: 'drawChart',
-        retireAge: 'drawChart',
-        birthdate: 'drawChart'
-      },
-      totalExpensesPerMonth: 0,
-      grossIncomePerMonth: 0,
-      get netIncomePerMonth () {
-        return this.grossIncomePerMonth - this.totalExpensesPerMonth;
-      },
-      return: 1.2,
-      inflation: 1.03,
-      death: 100,
-      retireAge: 65,
-      birthdate: '1901-01-01',
-      seed: 10000,
-      year: 0,
-      get dNow () {
-        return new Date();
-      },
-      get bdate () {
-        var offset = this.dNow.getTimezoneOffset() / 60;
-        return new Date(this.birthdate + 'T00:00:00-0' + offset + ':00');
-      },
-      get retireYear () {
-        return this.bdate.getUTCFullYear() + this.retireAge;
-      },
-      get yearsFromNow () {
-        return this.retireYear - this.dNow.getUTCFullYear();
-      },
-      getXYearsInFuture: function (years, x) {
-        return 12 * x * Math.pow(this.inflation, years);
-      },
-      growth: function growth (feed, grow, cycles) {
-        return feed * (1 - Math.pow(grow, cycles + 1))/(1 - grow);
-      },
-      get inflSum () {
-        return this.growth(12 * this.netIncomePerMonth, this.inflation, this.yearsFromNow);
-      },
-      get stockMSum () {
-        return this.growth(12 * this.netIncomePerMonth, this.return, this.yearsFromNow);
-      },
-      currency: function (ammount) {
-        return numberFormat.format(ammount);
-      },
-      drawChart: function () {
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('number', 'years from now');
-        data.addColumn('number', 'gross income');
-        data.addColumn('number', 'expenses');
-        data.addColumn('number', 'total savings');
-        data.addColumn('number', 'total invested');
-
-        var rows = [];
-        for (var i=0; i < this.yearsFromNow; i++) {
-          rows.push([
-            i,
-            this.getXYearsInFuture(i, this.grossIncomePerMonth),
-            this.getXYearsInFuture(i, this.totalExpensesPerMonth),
-            this.growth(12 * this.netIncomePerMonth, this.inflation, i),
-            this.growth(12 * this.netIncomePerMonth, this.return, i)
-          ]);
-        }
-        data.addRows(rows);
-
-        var options = {
-          title: "foo",
-          hAxis: {
-            title: 'Time'
-          },
-          vAxis: {
-            title: 'Popularity'
-          },
-          colors: ['#a52714', '#097138', '#bada55', '#deadbe'],
-          height: 1000
-        };
-
-
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.charts.Line(this.$.foo);
-        chart.draw(data, options);
-      },
-      domReady: function () {
-        google.setOnLoadCallback(this.drawChart.bind(this));
-        if (window.gchartsLoaded) {
-          this.drawChart();
-        }
-      }
-    };
-
-    Polymer(model);
+  script(src="./my-element.js")
