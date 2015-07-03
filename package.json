@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf build/*",
-    "build": "cp -R src/* build/ & npm run build:jade & npm run build:polymer & npm run build:webcomponents & npm run build:less & wait",
+    "build": "cp -R src/* build/ & npm run build:jade & npm run build:polymer & npm run build:webcomponents & npm run build:less & npm run build:js & wait",
+    "build:js": "babel src --out-dir build --ignore vendor",
     "build:polymer": "cp -R bower_components/polymer build/polymer",
     "build:webcomponents": "cp -R bower_components/webcomponentsjs build/webcomponentsjs",
     "build:jade": "jade src/*.jade -o build/ & jade --doctype html src/elements/*.jade -o build/elements",
@@ -13,7 +14,8 @@
     "prepublish": "npm run build",
     "watch:less": "nodemon --watch src/css -e less --exec 'npm run build:less'",
     "watch:jade": "nodemon --watch src -e jade --exec 'npm run build:jade'",
-    "watch": "npm run watch:less & npm run watch:jade",
+    "watch:js": "nodemon --watch src -e js --exec 'npm run build:js'",
+    "watch": "npm run watch:less & npm run watch:jade & npm run watch:jade",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

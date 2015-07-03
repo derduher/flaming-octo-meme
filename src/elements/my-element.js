@@ -42,9 +42,7 @@ var model = {
     return this.retireYear - this.dNow.getUTCFullYear();
   },
 
-  getXYearsInFuture: function (years, x, grow) {
-    return x * Math.pow(grow || this.inflation, years);
-  },
+  getXYearsInFuture: (years, x, grow) => x * Math.pow(grow || this.inflation, years),
 
   growth: function growth (savings0, feed, inflation, grow, year) {
     var key = '' + savings0 + feed + inflation + grow + year;
@@ -80,9 +78,7 @@ var model = {
     return this.growth(12 * this.netIncomePerMonth, this.return, this.yearsFromNow);
   },
 
-  currency: function (ammount) {
-    return numberFormat.format(ammount);
-  },
+  currency: ammount => numberFormat.format(ammount),
 
   drawChart: function () {
     // Create the data table.
