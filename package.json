@@ -15,7 +15,7 @@
     "watch:less": "nodemon --watch src/css -e less --exec 'npm run build:less'",
     "watch:jade": "nodemon --watch src -e jade --exec 'npm run build:jade'",
     "watch:js": "nodemon --watch src -e js --exec 'npm run build:js'",
-    "watch": "npm run watch:less & npm run watch:jade & npm run watch:jade",
+    "watch": "npm run watch:less & npm run watch:jade & npm run watch:jade & npm run watch:js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

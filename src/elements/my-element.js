@@ -42,7 +42,9 @@ var model = {
     return this.retireYear - this.dNow.getUTCFullYear();
   },
 
-  getXYearsInFuture: (years, x, grow) => x * Math.pow(grow || this.inflation, years),
+  getXYearsInFuture: function (years, x, grow) {
+    return x * Math.pow(grow || this.inflation, years);
+  },
 
   growth: function growth (savings0, feed, inflation, grow, year) {
     var key = '' + savings0 + feed + inflation + grow + year;
