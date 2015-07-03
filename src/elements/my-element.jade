@@ -1,0 +1,136 @@
+link(rel="import", href="../polymer/polymer.html")
+polymer-element( name="my-element" )
+  template
+    .row
+      .col--xs4
+        label( for="paycheck") Paycheck
+      .col--xs8
+        input#paycheck(
+          name="paycheck"
+          type="number"
+          min=0
+          value="{{grossIncomePerMonth}}"
+          required
+        )
+
+    .row
+      .col--xs4
+        label( for="expenses") Expenses
+      .col--xs8
+        input#expenses(
+          name="expenses"
+          type="number"
+          min=0
+          value="{{totalExpensesPerMonth}}"
+          required
+        )
+
+    // birthdate
+    .row
+      .col--xs4
+        label( for="birthdate") birthdate
+      .col--xs8
+        input#birthdate(
+          name="birthdate"
+          type="date"
+          value="{{birthdate}}"
+          required
+        )
+
+    // seed
+    .row
+      .col--xs4
+        label( for="seed") seed
+      .col--xs8
+        input#seed(
+          name="seed"
+          type="number"
+          required
+          step=1000
+          value="{{seed}}"
+        )
+
+    // retirement age
+    .row
+      .col--xs4
+        label( for="retireAge") retirement age
+      .col--xs8
+        input#retireAge(
+          name="retireAge"
+          type="number"
+          min=0
+          value="{{retireAge}}"
+          required
+        )
+
+    // death age
+    .row
+      .col--xs4
+        label( for="death") death age
+      .col--xs8
+        input#death(
+          name="death"
+          type="number"
+          min=0
+          value="{{death}}"
+          required
+        )
+
+    // inflation
+    .row
+      .col--xs4
+        label(
+          .col--xs8
+          for="inflation") Inflation
+      .col--xs8
+        input#inflation(
+          name="inflation"
+          type="number"
+          step="0.001"
+          value="{{inflation}}"
+          required
+        )
+    // return
+    .row
+      .col--xs4
+        label(for="return") Return
+      .col--xs8
+        input#return(
+          name="return"
+          type="number"
+          step="0.01"
+          value="{{return}}"
+        )
+    // year
+    .row
+      .col--xs4
+        label(for="year") Year
+      .col--xs8
+        input#year(
+          name="year"
+          type="number"
+          value="{{year}}"
+        )
+    .row
+      .col--xs12
+        button(on-click="{{drawChart}}") draw
+    .row
+      .col--xs4
+        label if money grows with inflation
+      .col--xs8 {{inflSum|currency}}
+    .row
+      .col--xs4
+        label stocks
+      .col--xs8 {{stockMSum|currency}}
+    .row
+      .col--xs12 retire {{yearsFromNow}} years from now in {{retireYear}}
+    .row
+      .col--xs12 income {{year|getXYearsInFuture(12 * grossIncomePerMonth)}}
+    .row
+      .col--xs12 expenses {{year|getXYearsInFuture(12 * totalExpensesPerMonth)}}
+    .row
+      .col--xs12 netincome {{year|getXYearsInFuture(12 * netIncomePerMonth)}}
+    .row
+      .col--xs12
+        #foo
+  script(src="./my-element.js")
